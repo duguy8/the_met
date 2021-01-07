@@ -8,4 +8,8 @@ class Patron
     @spending_money = spending_money
     @interests = Array.new
   end
+
+  def add_interest(interest)
+    @interests.push(interest)
+  end
 end
