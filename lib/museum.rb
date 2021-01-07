@@ -9,12 +9,27 @@ class Museum
     @patrons = Array.new
   end
 
+  def draw_lottery_winner(exhibit)
+    contestants = @patrons.find_all do |patron|
+      (patron.interests.include?(exhibit.name)) &&
+      (patron.spending_money <= exhibit.cost)
+    end
+    contestants.sample
+  end
+
+  def ticket_lottery_contestants(exhibit)
+    @patrons.find_all do |patron|
+      (patron.interests.include?(exhibit.name)) &&
+      (patron.spending_money <= exhibit.cost)
+    end
+  end
+
   def patrons_by_exhibit_interest
     hash = {}
     @exhibits.each do |exhibit|
       @patrons.each do |patron|
         if patron.interests.include?(exhibit.name)
-          hash[exhibit] << [patron] 
+          hash[exhibit] << [patron]
         elsif !patron.interests.include?(exhibit.name)
           hash[exhibit] = []
         end
