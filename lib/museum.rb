@@ -9,6 +9,20 @@ class Museum
     @patrons = Array.new
   end
 
+  def patrons_by_exhibit_interest
+    hash = {}
+    @exhibits.each do |exhibit|
+      @patrons.each do |patron|
+        if patron.interests.include?(exhibit.name)
+          hash[exhibit] << [patron] 
+        elsif !patron.interests.include?(exhibit.name)
+          hash[exhibit] = []
+        end
+      end
+    end
+    hash
+  end
+
   def admit(patron)
     @patrons.push(patron)
   end
